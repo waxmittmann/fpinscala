@@ -1,4 +1,4 @@
-For `Option`, we again consider both cases `None` and `Some` and expand the equation.
+djfFor `Option`, we again consider both cases `None` and `Some` and expand the equation.
 The monadic `unit` is the `Some(_)` constructor.
 
 // Left identity is trivially true for None:

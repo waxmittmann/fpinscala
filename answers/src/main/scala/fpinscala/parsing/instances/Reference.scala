@@ -103,7 +103,7 @@ object Reference extends Parsers[Parser] {
    * failures are uncommitted */
   def regex(r: Regex): Parser[String] = {
     val msg = "regex " + r
-    s => r.findPrefixOf(s.input) match {
+    (s: ParseState) => r.findPrefixOf(s.input) match {
       case None => Failure(s.loc.toError(msg), false)
       case Some(m) => Success(m,m.length)
     }

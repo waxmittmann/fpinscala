@@ -15,8 +15,10 @@ trait Applicative[F[_]] extends Functor[F] {
   // another function of type `B => C`. So if we map `f.curried` over an
   // `F[A]`, we get `F[B => C]`. Passing that to `apply` along with the
   // `F[B]` will give us the desired `F[C]`.
-  def map2[A,B,C](fa: F[A], fb: F[B])(f: (A, B) => C): F[C] =
+  def map2[A,B,C](fa: F[A], fb: F[B])(f: (A, B) => C): F[C] = {
+    println("map2 in applicative")
     apply(map(fa)(f.curried))(fb)
+  }
 
   // We simply use `map2` to lift a function into `F` so we can apply it
   // to both `fab` and `fa`. The function being lifted here is `_(_)`,
@@ -30,8 +32,10 @@ trait Applicative[F[_]] extends Functor[F] {
 
   def unit[A](a: => A): F[A]
 
-  def map[A,B](fa: F[A])(f: A => B): F[B] =
+  def map[A,B](fa: F[A])(f: A => B): F[B] = {
+    println(s"Applying map to $fa")
     apply(unit(f))(fa)
+  }
 
   def sequence[A](fas: List[F[A]]): F[List[A]] =
     traverse(fas)(fa => fa)

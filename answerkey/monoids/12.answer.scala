@@ -1,3 +1,20 @@
+package chapterx.answer12
+import scratchpad.monoid._
+
+//object Main {
+//  def main(args: Array[String]): Unit = {
+//
+////    Foldable[List]
+////
+//    val foldable: Foldable[List] = new Foldable[List] {}
+//
+//
+////    val listFoldable: Foldable[List] = new ListFoldable()
+//
+//    ListFoldable.
+//  }
+//}
+
 trait Foldable[F[_]] {
   def foldRight[A, B](as: F[A])(z: B)(f: (A, B) => B): B =
     foldMap(as)(f.curried)(endoMonoid[B])(z)
